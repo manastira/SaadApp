@@ -1,0 +1,13 @@
+
+
+Click here to disable all the form fields:
+<input type="checkbox" [(ngModel)]="all">
+<br>
+<br>
+
+<input type="text"  value="{{data}}" [disabled]="all">
+<input type="radio" [disabled]="all">
+<select [disabled]="all">
+  <option>Female</option>
+  <option>Male</option>
+</select>

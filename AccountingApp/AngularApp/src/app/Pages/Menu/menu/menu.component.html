@@ -1,0 +1,36 @@
+<p>menu works!</p>
+<mat-drawer-container class="example-container" autosize>
+  <button *ngIf="!showMenuButton" type="button" mat-button (click)=showMenu(drawer)>
+    <img src="../" />
+  </button>
+  <mat-drawer #drawer mode="side">
+    <button *ngIf="showMenuButton" type="button" mat-button (click)=hideMenu(drawer)>
+      <img src="../" />
+    </button>
+    <div class="example-sidenav">
+
+      <p>MENU 1</p>
+      <p>MENUWWWW 2</p>
+      <p> <a href="">MENU 3</a></p>
+      <a href="/home" routerLinkActive="active-link">Bob</a>
+
+
+
+      <!-- <button mat-menu-item>
+        <!--<mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button> -->
+      <!--<p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Toggle extra text
+      </button>-->
+    </div>
+  </mat-drawer>
+
+  <!--<div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>-->
+
+</mat-drawer-container>

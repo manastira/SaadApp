@@ -1,0 +1,118 @@
+<!--<mat-toolbar color="primary" >
+  <span>Angular 8 MatTable CRUD Example</span>
+  <span class="spacer"></span>
+  Reload data:
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>-->
+<!--<button mat-icon-button (click)="refresh()">
+  <mat-icon>refresh</mat-icon>
+</button>-->
+<!--<app-details [data]="dataRow"></app-details>-->
+<div class="container mat-elevation-z8">
+
+  <div class="form" style="text-align:center">
+    <mat-form-field floatPlaceholder="never" color="accent" style="padding-right:20px">
+      <input matInput #filter style="color:darkslategrey" placeholder="Филтриране по име" [formControl]="term">
+      <div>
+        <div *ngFor="let result of filtratedData">
+          <a (click)="getText(result.name)"> {{result.name}}</a>
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="never" color="accent" style="padding-right:20px">
+      <input matInput #filter type="number" style="color:darkslategrey" placeholder="Филтриране по бултат" [formControl]="term">
+      <!--<div>
+        <div *ngFor="let result of filtratedData">
+          <a (click)="getText(result.name)"> {{result.name}}</a>
+        </div>
+      </div>-->
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button color="primary">
+      <mat-icon aria-label="Side nav toggle icon">search</mat-icon>
+    </button>
+  </div>
+
+
+
+  <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef><h6><b> Номер на договор </b></h6></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef><h6><b> Име на контрагента</b></h6> </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef><h6><b> Булстат </b></h6></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef><h6><b> ЕГН</b></h6> </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}}</mat-cell>
+    </ng-container>
+    <!--Likns-->
+    <ng-container matColumnDef="link">
+      <mat-header-cell *matHeaderCellDef>
+        <h6><b> Информация</b></h6>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <!--<a routerLink="./" (click)="detailData(row.position)" routerLinkActive="active">повече информация</a>-->
+        <a [routerLink]="['/details',row]" routerLinkActive="active">повече информация</a>
+
+      </mat-cell>
+    </ng-container>
+
+    <!-- actions --> 
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew($event)">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <!--<button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+        <mat-icon aria-label="Edit" style="color:darkslategrey">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+        <mat-icon aria-label="Delete" style="color:darkslategrey">delete</mat-icon>
+      </button>-->
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+<mat-menu #menu="matMenu">
+
+  <div *ngFor="let result of filtratedData">
+    <button mat-menu-item>
+      <a (click)="getText(result.name)"> {{result.name}}</a>
+    </button>
+  </div>
+  <!--<button mat-menu-item disabled>
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>lock_open</mat-icon>
+    <span>LogOut</span>
+  </button>-->
+</mat-menu>

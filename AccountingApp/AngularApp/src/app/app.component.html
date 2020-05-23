@@ -1,0 +1,51 @@
+
+
+<mat-toolbar style="background-color:silver">
+  <mat-toolbar-row>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <label style="padding-top:10px; font-family:'Roboto, Helvetica Neue, sans-serif'" (click)="redirectWelcome()"><b>SAAD Consulting</b></label>
+    <!--<span style="margin-left: 20px"><img (click)="redirectWelcome()" src="./assets/logo-SAAD.jpg"></span>-->
+    <span class="example-spacer"></span>
+    <div *ngIf="userlogin">
+      <mat-icon class="example-icon" [matMenuTriggerFor]="menu" aria-hidden="false" aria-label="Example person icon">person</mat-icon>
+      <span style="margin-left:10px"><a [routerLink]="['']" [matMenuTriggerFor]="menu" (click)="profile()" style="color:black">Профил:{{profileName}}</a></span>
+    </div>
+
+    <mat-icon class="example-icon" (click)="profile()" aria-hidden="false" aria-label="Example person icon">lock_open</mat-icon>
+    <span style="margin-left:10px"><a [routerLink]="['']" (click)="logout()" style="color:black">Изход</a></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!--<app-header></app-header>-->
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation" style="background-color:silver">
+    <mat-nav-list>
+      <a mat-list-item routerLink='/table'>Информационна таблица</a>
+      <a mat-list-item routerLink='/menu'>Допълнитена информация</a>
+      <a mat-list-item routerLink='/testtable'>Търсене</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet (activate)='onActivate($event)'></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>info</mat-icon>
+    <span>Profile info</span>
+  </button>
+  <!--<button mat-menu-item disabled>-->
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>lock_open</mat-icon>
+    <span>LogOut</span>
+  </button>
+</mat-menu>
